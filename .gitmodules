@@ -1,0 +1,8 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/aeiouxx/nivlalulu-be.git
+	branch = master
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/aeiouxx/nivlalulu-fe.git
+	branch = master
