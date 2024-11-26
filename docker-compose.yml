@@ -1,0 +1,36 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+    networks:
+      - nivlalulu-network
+  db:
+    container_name: database
+    image: postgres
+    restart: always
+    environment:
+      #todo: secrets 
+      POSTGRES_DB: nivlalulu_db
+      POSTGRES_USER: nivlalulu_user
+      POSTGRES_PASSWORD: nivlalulu_password
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - nivlalulu-network
+
+volumes:
+  db_data:
+
+networks:
+  nivlalulu-network:
+    driver: bridge
