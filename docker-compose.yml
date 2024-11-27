@@ -1,0 +1,58 @@
+services:
+  be:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    env_file:
+      - path: ./backend/.env
+        required: true
+    depends_on:
+      - db
+    networks:
+      - nivlalulu-network
+  db:
+    container_name: database
+    image: postgres
+    restart: always
+    env_file:
+      - path: ./env/db/.env
+        required: true
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - nivlalulu-network
+
+  lb:
+    container_name: lb
+    image: liquibase/liquibase
+    # keep it running
+    # either docker exec -it lb bash 
+    # or docker exec -it lb liquibase <command_to_run>
+    entrypoint: >
+      bash -c "trap 'echo SIGINT; exit' INT;
+             trap 'echo SIGTERM; exit' TERM;
+             echo I sleep...;
+             sleep infinity"
+    depends_on:
+      - db
+    volumes:
+      - ./env/lb/liquibase.properties:/liquibase/liquibase.properties
+      - ./backend/src/main/resources/db/changelog:/liquibase/backend_changelog
+    networks:
+      - nivlalulu-network
+    profiles:
+      - liquibase
+
+volumes:
+  db_data:
+
+networks:
+  nivlalulu-network:
+    driver: bridge
