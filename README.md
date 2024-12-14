@@ -1,3 +1,19 @@
+## Workflow
+
+1. **Cloning the repository**
+    ```bash
+    git submodule update --init
+    ```
+    this will checkout the `backend` and `frontend` repositories at the commit pointed to by the `nivlalulu` superproject.
+    *Updating without the --init switch will only update existing repositories but not checkout new ones*
+2. **Updating the repository**:
+  Once changes get merged into any of the submodule repositories (e.g. `nivlalulu-be`), switch to the superproject and run:
+    ```bash
+    git pull # (or git fetch + git pull), 
+    git submodule update # (optionally with --init switch)
+    ```
+    `git pull` is necessary otherwise the submodules would check out commits pointed to by the current local `master` state instead of `HEAD` synced with remote.
+
 ## Configuration
 Before running the application, you may need to adjust environment variables:
 
