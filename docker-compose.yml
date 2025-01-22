@@ -28,6 +28,19 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - nivlalulu-network
+  fe:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - /app/node_modules
+    networks:
+      - nivlalulu-network
 
   lb:
     container_name: lb
