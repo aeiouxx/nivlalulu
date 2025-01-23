@@ -1,5 +1,13 @@
-## Workflow
+# SELF-SIGNED CERTIFICATES ARE A HUGE PAIN IN THE ASS
+  This app comes bundled with a self-signed SSL certificate, however because browsers are annoying, the browser won't trust the backend certificate and you will probably get CORS issues when you push requests to the BE.
 
+  Because I really don't want to get a valid signed certificate for this, we mitigate that the following way:
+
+    1. Connect to the backend via the browser: https://localhost:8443
+    2. Select trust certificate
+    3. Your browser will now trust the self-signed BE certificate and calls on the FE will work normally
+
+## Workflow
 1. **Cloning the repository**
     ```bash
     git submodule update --init
@@ -107,3 +115,5 @@ Before running the application, you may need to adjust environment variables:
     - Update your `docker compose version` to be `>= 2.24.0`.
 3. **Gradle: :compileJava invalid source release 21**
     - If you have an older version of IntelliJ Idea and running the app from idea, it automatically sets the JVM of the Gradle build tool to JVM 17 or less, even if `./gradlew --version` reports a different one.
+
+
