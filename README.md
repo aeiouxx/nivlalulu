@@ -8,6 +8,8 @@
     3. Your browser will now trust the self-signed BE certificate and calls on the FE will work normally
     
   ![cry](https://github.com/user-attachments/assets/f6a4073b-bf48-4131-801e-cda7b8af3313)
+
+  (We could also bundle mkcert with this app and install a certificate to your OS, but that seems quite intrusive)
 ## Workflow
 1. **Cloning the repository**
     ```bash
