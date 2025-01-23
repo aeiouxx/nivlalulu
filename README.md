@@ -4,9 +4,10 @@
   Because I really don't want to get a valid signed certificate for this, we mitigate that the following way:
 
     1. Connect to the backend via the browser: https://localhost:8443
-    2. Select trust certificate
+    2. Select trust certificate (accept risk and continue or some other way to confirm, browser dependent)
     3. Your browser will now trust the self-signed BE certificate and calls on the FE will work normally
-
+    
+  ![cry](https://github.com/user-attachments/assets/f6a4073b-bf48-4131-801e-cda7b8af3313)
 ## Workflow
 1. **Cloning the repository**
     ```bash
