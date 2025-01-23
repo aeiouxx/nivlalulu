@@ -61,14 +61,9 @@ Before running the application, you may need to adjust environment variables:
   
 
 3. **Stopping the application**:
-
     When you are done you can stop and remove the containers by:
     ```bash
     docker-compose down
-    ```
-    If the liquibase container is running, it must be killed manually via:
-    ```bash
-    docker kill lb
     ```
 
 ## Issues

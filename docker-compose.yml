@@ -55,20 +55,17 @@ services:
     # keep it running
     # either docker exec -it lb bash 
     # or docker exec -it lb liquibase <command_to_run>
-    entrypoint: >
-      bash -c "trap 'echo SIGINT; exit' INT;
-             trap 'echo SIGTERM; exit' TERM;
-             echo I sleep...;
-             sleep infinity"
+    entrypoint: ["/entrypoint.sh"]
     depends_on:
       - db
     volumes:
       - ./env/lb/liquibase.properties:/liquibase/liquibase.properties
       - ./backend/src/main/resources/db/changelog:/liquibase/backend_changelog
+      - type: bind
+        source: ./env/lb/entrypoint.sh
+        target: /entrypoint.sh
     networks:
       - nivlalulu-network
-    profiles:
-      - liquibase
 
 volumes:
   db_data:
