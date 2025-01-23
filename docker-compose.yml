@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8443:8443
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     env_file:
