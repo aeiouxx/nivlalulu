@@ -28,6 +28,13 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - nivlalulu-network
+  rd:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - nivlalulu-network
   fe:
     container_name: frontend
     build:
